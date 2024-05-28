@@ -21,20 +21,33 @@ const Sidebar: React.FC<{ params: any; setParams: (params: any) => void; setMode
     setParams((prevParams: any) => ({ ...prevParams, [param]: value }))
   }
 
+  const handlePresetChange = (preset: string) => {
+    if (model === 'plumbBob') {
+      if (preset === 'c1_120_preset') {
+        setParams({ d1: -0.320119, d2: 0.092464, d3: -0.000263, d4: -0.001236, d5: -0.011178 })
+      }
+    } else if (model === 'fisheye') {
+      if (preset === 'c1_120_preset') {
+        setParams({ d1: -0.076387, d2: 0.044689, d3: -0.049131, d4: 0.017332, d5: 0.0 })
+      }
+    }
+  }
+
   return (
-    <aside className="w-1/5 mb-4 lg:block col-span-1 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700 p-5">
+    <aside className="w-1/5 mt-4 mb-4 ml-4 bg-gray-100 border border-gray-300 p-5">
       <label
         htmlFor="presets"
         className="block mb-2 text-xl font-medium text-gray-900 dark:text-white">
         Select your Camera Model
       </label>
 
+
       <div className="inline-flex rounded-md shadow-sm mb-4" role="group">
         <button
           type="button"
           className={`py-3 px-4 inline-flex justify-center items-center gap-2 -ml-px first:rounded-l-lg first:ml-0 last:rounded-r-lg border 
           font-medium bg-white text-gray-900 align-middle hover:bg-gray-50 focus:z-10 focus:outline-solid focus:ring-2 focus:ring-blue-500 transition-all text-sm sm:p-4 ${
-            model === 'plumbBob' ? 'bg-gray-200 text-black' : ''
+            model === 'plumbBob' ? 'bg-gray-200 text-black border-blue-500' : 'border-gray-300'
           }`}
           onClick={() => handleModelChange('plumbBob')}
         >
@@ -47,7 +60,7 @@ const Sidebar: React.FC<{ params: any; setParams: (params: any) => void; setMode
           type="button"
           className={`py-3 px-4 inline-flex justify-center items-center gap-2 -ml-px first:rounded-l-lg first:ml-0 last:rounded-r-lg border 
           font-medium bg-white text-gray-900 align-middle hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm sm:p-4 ${
-            model === 'fisheye' ? 'bg-gray-900 text-black' : ''
+            model === 'fisheye' ? 'bg-gray-200 text-black border-blue-500' : 'border-gray-300'
           }`}
           onClick={() => handleModelChange('fisheye')}
         >
@@ -69,21 +82,21 @@ const Sidebar: React.FC<{ params: any; setParams: (params: any) => void; setMode
         {model === 'plumbBob' && (
           <select
             id="presets"
+            onChange={(e) => handlePresetChange(e.target.value)}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
             <option value="" disabled selected>Choose a preset</option>
-            <option value="preset1">C1</option>
-            <option value="preset2">Lucid</option>
+            <option value="c1_120_preset">C1 120°</option>
           </select>
         )}
         {model === 'fisheye' && (
           <select
             id="presets"
+            onChange={(e) => handlePresetChange(e.target.value)}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
             <option value="" disabled selected>Choose a preset</option>
-            <option value="preset1">C1 120</option>
-            <option value="preset2">Willfire</option>
+            <option value="c1_120_preset">C1 120°</option>
           </select>
         )}
       </form>
