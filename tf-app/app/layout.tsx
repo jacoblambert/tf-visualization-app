@@ -3,8 +3,8 @@ import './globals.css'
 import type { ReactNode } from 'react'
 
 export const metadata = {
-  title: 'Lens Distortion Simulator',
-  description: 'A web application to demonstrate the effects of distortion parameters on lenses',
+  title: 'TF Simulator',
+  description: 'A web application to demonstrate the relative frames of references',
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
